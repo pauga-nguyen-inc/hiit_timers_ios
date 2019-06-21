@@ -19,6 +19,7 @@ class TimerTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
         tableView.register(UINib(nibName: "TimerTableViewCell", bundle: nil), forCellReuseIdentifier: "TimerTableViewCell")
+        tableView.separatorStyle = .none
         timers.append(testTimer)
     }
     
@@ -33,14 +34,14 @@ class TimerTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5 //timers.count
+        return timers.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TimerTableViewCell", for: indexPath) as! TimerTableViewCell
 
-        let timer = timers[0] //indexPath.row]
+        let timer = timers[indexPath.row]
 
         cell.titleLabel.text = timer.timerName
         cell.workingTimeLabel.text = String(timer.workingTime)
@@ -51,11 +52,11 @@ class TimerTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let timer = timers[indexPath.row]
-        
-        print("Timer Name: \(timer.timerName) \nTimer description: \(timer.description) \nWorking Time: \(timer.workingTime) \nRest time: \(timer.restTime)")
-    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let timer = timers[indexPath.row]
+//
+//        print("Timer Name: \(timer.timerName) \nTimer description: \(timer.description) \nWorking Time: \(timer.workingTime) \nRest time: \(timer.restTime)")
+//    }
 
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -82,19 +83,22 @@ class TimerTableViewController: UITableViewController {
         timers.insert(timerToMove, at: destinationIndexPath.row)
         tableView.reloadData()
     }
+    
     @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
         let tableViewEditingMode = tableView.isEditing
         tableView.setEditing(!tableViewEditingMode, animated: true)
     }
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "editTimerSegue" {
+            let indexPath = tableView.indexPathForSelectedRow!
+            let timer = timers[indexPath.row]
+            let addTimerController = segue.destination as! CreateTimerViewController
+            addTimerController.timer = timer
+        }
     }
-    */
-
 }

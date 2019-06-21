@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -54,7 +55,11 @@
                                 <action selector="editButtonTapped:" destination="Dp3-1q-5G5" id="lkM-Vb-x0F"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="iJD-1c-zrs"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="iJD-1c-zrs">
+                            <connections>
+                                <segue destination="67H-S2-0cn" kind="show" identifier="createTimerSegue" id="pej-Fq-kJy"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="editButton" destination="KDv-HJ-aYK" id="zVD-bB-tr1"/>
@@ -63,6 +68,69 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Swx-ug-8Ax" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="449" y="145"/>
+        </scene>
+        <!--Create Timer View Controller-->
+        <scene sceneID="JuC-20-HJ3">
+            <objects>
+                <viewController id="67H-S2-0cn" customClass="CreateTimerViewController" customModule="HIITTimers" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VWz-EK-4ii">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="W0v-Rh-a3S">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Timer Name (Optional)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MO7-iz-HLX">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Working Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9y9-7g-J3T">
+                                        <rect key="frame" x="0.0" y="43.5" width="414" height="52"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l4d-dY-4G9">
+                                        <rect key="frame" x="0.0" y="95.5" width="414" height="216"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="216" id="y80-L0-r7I"/>
+                                        </constraints>
+                                    </pickerView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rest Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wH-TH-8mq">
+                                        <rect key="frame" x="0.0" y="311.5" width="414" height="52.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uaa-KX-VLx">
+                                        <rect key="frame" x="0.0" y="364" width="414" height="410"/>
+                                    </pickerView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="W0v-Rh-a3S" firstAttribute="top" secondItem="pYE-LL-0vn" secondAttribute="top" id="PYX-9l-7LO"/>
+                            <constraint firstItem="pYE-LL-0vn" firstAttribute="trailing" secondItem="W0v-Rh-a3S" secondAttribute="trailing" id="aXq-Q8-Ohy"/>
+                            <constraint firstItem="pYE-LL-0vn" firstAttribute="bottom" secondItem="W0v-Rh-a3S" secondAttribute="bottom" id="cLg-js-yST"/>
+                            <constraint firstItem="W0v-Rh-a3S" firstAttribute="leading" secondItem="pYE-LL-0vn" secondAttribute="leading" id="f4u-5q-GSi"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pYE-LL-0vn"/>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="restTimePicker" destination="Uaa-KX-VLx" id="1Xf-Di-oLW"/>
+                        <outlet property="timerTitleTextField" destination="MO7-iz-HLX" id="BnU-2Q-Vka"/>
+                        <outlet property="workingTimePicker" destination="l4d-dY-4G9" id="AlT-2l-dGZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g55-2U-FTT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1415" y="-12"/>
         </scene>
         <!--HIIT TImers-->
         <scene sceneID="cbW-1F-ZS9">
