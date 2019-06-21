@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateTimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class CreateTimerViewController: UIViewController {
 
     @IBOutlet weak var timerTitleTextField: UITextField!
     @IBOutlet weak var workingTimePicker: UIPickerView!
@@ -36,13 +36,29 @@ class CreateTimerViewController: UIViewController, UIPickerViewDelegate, UIPicke
         
     }
     
-    // MARK: - PickerView delegate methods
-    
+
+
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }   
+}
+
+// MARK: - PickerView delegate methods
+
+extension CreateTimerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == workingTimePicker {
+            return workingTimePickerValues.count
+        }
         return workingTimePickerValues.count
     }
     
@@ -57,12 +73,4 @@ class CreateTimerViewController: UIViewController, UIPickerViewDelegate, UIPicke
             workingTimeSeconds = row
         }
     }
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }   
 }
