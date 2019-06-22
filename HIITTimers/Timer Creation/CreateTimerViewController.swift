@@ -13,6 +13,7 @@ class CreateTimerViewController: UIViewController {
     @IBOutlet weak var timerTitleTextField: UITextField!
     @IBOutlet weak var workingTimePicker: UIPickerView!
     @IBOutlet weak var restTimePicker: UIPickerView!
+    @IBOutlet weak var workingTimeInfoLabel: UILabel!
     
     var timer: TimerModel?
     let workingTimePickerValues = Array(0...60)
@@ -24,7 +25,10 @@ class CreateTimerViewController: UIViewController {
     
 //    private var minutes: Int
 //    private var seconds: Int
-     
+    override func viewWillAppear(_ animated: Bool) {
+        workingTimePicker?.superview?.isHidden = true
+        restTimePicker?.superview?.isHidden = true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,7 +40,7 @@ class CreateTimerViewController: UIViewController {
         
     }
     
-
+    
 
     // MARK: - Navigation
 
