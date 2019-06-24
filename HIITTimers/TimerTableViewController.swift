@@ -12,7 +12,7 @@ class TimerTableViewController: UITableViewController {
 
     @IBOutlet weak var editButton: UIBarButtonItem!
     
-    var testTimer = TimerModel(timerName: "Tabata Timer", workingTime: 0.5, restTime: 0.06, description: "Your standard tabata timer", rounds: 5)
+    var testTimer = TimerModel(timerName: "Tabata Timer", workingTimeMinutes: 4, workingTimeSeconds: 30, restTimeMinutes: 1, restTimeSeconds: 0, rounds: 4)
     
     var timers = [TimerModel]()
     
@@ -44,8 +44,8 @@ class TimerTableViewController: UITableViewController {
         let timer = timers[indexPath.row]
 
         cell.titleLabel.text = timer.timerName
-        cell.workingTimeLabel.text = String(timer.workingTime)
-        cell.restTimeLabel.text = String(timer.restTime)
+        cell.workingTimeLabel.text = "\(FormatTimes.formatTimeForLabel(time: timer.workingTimeMinutes)):\(FormatTimes.formatTimeForLabel(time: timer.workingTimeSeconds))"
+        cell.restTimeLabel.text = "\(FormatTimes.formatTimeForLabel(time: timer.restTimeMinutes)):\(FormatTimes.formatTimeForLabel(time: timer.restTimeSeconds))"
         cell.numberOfRoundsLabel.text = String(timer.rounds)
         cell.showsReorderControl = true
         
@@ -89,16 +89,23 @@ class TimerTableViewController: UITableViewController {
         tableView.setEditing(!tableViewEditingMode, animated: true)
     }
 
+    override func unwind(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
+        
+    }
+    
+    @IBAction func unwindToHome(unwindSegue: UIStoryboardSegue) {
+        
+    }
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        if segue.identifier == "editTimerSegue" {
+        if segue.identifier == "editTimerSegue1" {
             let indexPath = tableView.indexPathForSelectedRow!
             let timer = timers[indexPath.row]
-            let addTimerController = segue.destination as! CreateTimerViewController
-            addTimerController.timer = timer
+            let addTimerController = segue.destination as! CreateTimerTableViewController
+            //addTimerController.timer = timer
         }
     }
 }

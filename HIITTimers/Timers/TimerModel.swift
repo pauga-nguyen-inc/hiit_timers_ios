@@ -10,8 +10,9 @@ import Foundation
 
 struct TimerModel {
     var timerName: String
-    var workingTime: Double
-    var restTime: Double
-    var description: String
+    var workingTimeMinutes: Int
+    var workingTimeSeconds: Int
+    var restTimeMinutes: Int = 0
+    var restTimeSeconds: Int = 0
     var rounds: Int
 }
