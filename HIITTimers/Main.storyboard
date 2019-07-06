@@ -71,7 +71,7 @@
         <!--Root View Controller-->
         <scene sceneID="ZER-Ws-bi6">
             <objects>
-                <tableViewController id="GIj-cP-gPq" customClass="CreateTimerTableViewController" customModule="HIITTimers" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="GIj-cP-gPq" customClass="AddEditTimerTableViewController" customModule="HIITTimers" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2zd-5m-3lb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -235,10 +235,14 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="IES-ud-11v">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Wxx-TP-l1I">
                             <connections>
-                                <segue destination="bPu-QQ-aBZ" kind="unwind" unwindAction="unwindToHomeWithUnwindSegue:" id="LoJ-44-Yzv"/>
+                                <segue destination="bPu-QQ-aBZ" kind="unwind" identifier="" unwindAction="unwindToHomeWithUnwindSegue:" id="LoJ-44-Yzv"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="VIo-9f-JVE"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="VIo-9f-JVE">
+                            <connections>
+                                <segue destination="bPu-QQ-aBZ" kind="unwind" identifier="saveUnwind" unwindAction="unwindToHomeWithUnwindSegue:" id="qGj-NR-B8F"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="numberOfRoundsLabel" destination="Yip-gL-cdr" id="Wtq-M9-jWv"/>

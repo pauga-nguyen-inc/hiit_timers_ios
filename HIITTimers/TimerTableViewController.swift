@@ -7,20 +7,26 @@
 //
 
 import UIKit
+import CoreData
 
 class TimerTableViewController: UITableViewController {
 
     @IBOutlet weak var editButton: UIBarButtonItem!
     
-    var testTimer = TimerModel(timerName: "Tabata Timer", workingTimeMinutes: 4, workingTimeSeconds: 30, restTimeMinutes: 1, restTimeSeconds: 0, rounds: 4)
+    let userInfoService = UserInfoService()
     
-    var timers = [TimerModel]()
+    var testTimer = TimerModel(timerName: "Tabata Timer", workingTimeMinutes: 4, workingTimeSeconds: 30, restTimeMinutes: 1, restTimeSeconds: 0, rounds: 4)
+
+    var timers: [TimerModel] = [TimerModel(timerName: "Tabata Timer", workingTimeMinutes: 4, workingTimeSeconds: 30, restTimeMinutes: 1, restTimeSeconds: 0, rounds: 4)]
+    
+    //var timers: [NSManagedObject] = []
     
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
         tableView.register(UINib(nibName: "TimerTableViewCell", bundle: nil), forCellReuseIdentifier: "TimerTableViewCell")
         tableView.separatorStyle = .none
-        timers.append(testTimer)
+        //loadTimers()
+        //timers.append(testTimer)
     }
     
     override func viewDidLoad() {
@@ -41,8 +47,9 @@ class TimerTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TimerTableViewCell", for: indexPath) as! TimerTableViewCell
 
+        //let timer = createTimerFromData(timer: timers[indexPath.row])
         let timer = timers[indexPath.row]
-
+        
         cell.titleLabel.text = timer.timerName
         cell.workingTimeLabel.text = "\(FormatTimes.formatTimeForLabel(time: timer.workingTimeMinutes)):\(FormatTimes.formatTimeForLabel(time: timer.workingTimeSeconds))"
         cell.restTimeLabel.text = "\(FormatTimes.formatTimeForLabel(time: timer.restTimeMinutes)):\(FormatTimes.formatTimeForLabel(time: timer.restTimeSeconds))"
@@ -52,6 +59,17 @@ class TimerTableViewController: UITableViewController {
         return cell
     }
     
+    private func createTimerFromData(timer: NSManagedObject) -> TimerModel {
+        guard let name = timer.value(forKey: "timername") as? String,
+            let workingTimeMinutes = timer.value(forKey: "workingtimeminutes") as? Int,
+            let workingTimeSeconds = timer.value(forKey: "workingtimeseconds") as? Int,
+            let restTimeMinutes = timer.value(forKey: "resttimeminutes") as? Int,
+            let restTimeSeconds = timer.value(forKey: "resttimeseconds") as? Int,
+            let numberOfRounds = timer.value(forKey: "numberofrounds") as? Int
+            else { return TimerModel() }
+        
+        return TimerModel(timerName: name, workingTimeMinutes: workingTimeMinutes, workingTimeSeconds: workingTimeSeconds, restTimeMinutes: restTimeMinutes, restTimeSeconds: restTimeSeconds, rounds: numberOfRounds)
+    }
 //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let timer = timers[indexPath.row]
 //
@@ -73,10 +91,6 @@ class TimerTableViewController: UITableViewController {
         }    
     }
     
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .none
-    }
-
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
         let timerToMove = timers.remove(at: sourceIndexPath.row)
@@ -90,22 +104,44 @@ class TimerTableViewController: UITableViewController {
     }
 
     override func unwind(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
+        guard unwindSegue.identifier == "saveUnwind" else { return }
         
+        let sourceViewController = unwindSegue.source as! AddEditTimerTableViewController
+        
+        if let timer = sourceViewController.timer {
+            let newIndexPath = IndexPath(row: timers.count, section: 0)
+            timers.append(timer)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        }
     }
     
     @IBAction func unwindToHome(unwindSegue: UIStoryboardSegue) {
+        guard unwindSegue.identifier == "saveUnwind" else { return }
         
+        let sourceViewController = unwindSegue.source as! AddEditTimerTableViewController
+        
+        if let timer = sourceViewController.timer {
+            let newIndexPath = IndexPath(row: timers.count, section: 0)
+            timers.append(timer)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        }
     }
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        if segue.identifier == "editTimerSegue1" {
-            let indexPath = tableView.indexPathForSelectedRow!
-            let timer = timers[indexPath.row]
-            let addTimerController = segue.destination as! CreateTimerTableViewController
-            //addTimerController.timer = timer
-        }
+//        if segue.identifier == "editTimerSegue" {
+//            let indexPath = tableView.indexPathForSelectedRow!
+//            let timer = timers[indexPath.row]
+//            let addEditTimerTableViewController = segue.destination as! AddEditTimerTableViewController
+//            addEditTimerTableViewController.timer = timer
+//        }
+        
+        tableView.reloadData()
+    }
+    
+    private func loadTimers() {
+        timers = userInfoService.getTimers()
     }
 }

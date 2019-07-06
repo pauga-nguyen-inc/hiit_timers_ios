@@ -13,8 +13,11 @@
 		F512A71A22A47AD400C5128E /* HIITTimersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F512A71922A47AD400C5128E /* HIITTimersTests.swift */; };
 		F512A72522A47AD400C5128E /* HIITTimersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F512A72422A47AD400C5128E /* HIITTimersUITests.swift */; };
 		F512A73422A47BF500C5128E /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F512A73322A47BF500C5128E /* TimerModel.swift */; };
-		F54BB28C22BDBD2800B2052F /* CreateTimerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54BB28B22BDBD2800B2052F /* CreateTimerTableViewController.swift */; };
+		F54BB28C22BDBD2800B2052F /* AddEditTimerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54BB28B22BDBD2800B2052F /* AddEditTimerTableViewController.swift */; };
 		F54BB28F22C0727000B2052F /* FormatTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54BB28E22C0727000B2052F /* FormatTimes.swift */; };
+		F5CD584722C7202E00DD4CAE /* UserInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CD584622C7202E00DD4CAE /* UserInfoService.swift */; };
+		F5CD586B22C87EBE00DD4CAE /* HITTTimers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F5CD586922C87EBE00DD4CAE /* HITTTimers.xcdatamodeld */; };
+		F5CD586E22CC432300DD4CAE /* TimerInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CD586D22CC432300DD4CAE /* TimerInfoService.swift */; };
 		F5EB8BB722ADD53100C18F42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5EB8BB622ADD53100C18F42 /* Main.storyboard */; };
 		F5EB8BB922ADD7A900C18F42 /* TimerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EB8BB822ADD7A900C18F42 /* TimerTableViewController.swift */; };
 		F5EB8BBB22B3271E00C18F42 /* TimerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EB8BBA22B3271E00C18F42 /* TimerTableViewCell.swift */; };
@@ -51,8 +54,11 @@
 		F512A72422A47AD400C5128E /* HIITTimersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIITTimersUITests.swift; sourceTree = "<group>"; };
 		F512A72622A47AD400C5128E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F512A73322A47BF500C5128E /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
-		F54BB28B22BDBD2800B2052F /* CreateTimerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTimerTableViewController.swift; sourceTree = "<group>"; };
+		F54BB28B22BDBD2800B2052F /* AddEditTimerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditTimerTableViewController.swift; sourceTree = "<group>"; };
 		F54BB28E22C0727000B2052F /* FormatTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatTimes.swift; sourceTree = "<group>"; };
+		F5CD584622C7202E00DD4CAE /* UserInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoService.swift; sourceTree = "<group>"; };
+		F5CD586A22C87EBE00DD4CAE /* HITTTimers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HITTTimers.xcdatamodel; sourceTree = "<group>"; };
+		F5CD586D22CC432300DD4CAE /* TimerInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerInfoService.swift; sourceTree = "<group>"; };
 		F5EB8BB622ADD53100C18F42 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F5EB8BB822ADD7A900C18F42 /* TimerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTableViewController.swift; sourceTree = "<group>"; };
 		F5EB8BBA22B3271E00C18F42 /* TimerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTableViewCell.swift; sourceTree = "<group>"; };
@@ -107,9 +113,11 @@
 		F512A70322A47AD300C5128E /* HIITTimers */ = {
 			isa = PBXGroup;
 			children = (
+				F5CD586C22C87ECB00DD4CAE /* Core Data */,
 				F54BB28D22C0725300B2052F /* Helpers */,
 				F54BB28622BC5E2700B2052F /* Timer Creation */,
 				F512A73222A47BDC00C5128E /* Timers */,
+				F5CD584522C71FFD00DD4CAE /* Utilities */,
 				F512A70422A47AD300C5128E /* AppDelegate.swift */,
 				F5EB8BB622ADD53100C18F42 /* Main.storyboard */,
 				F5EB8BB822ADD7A900C18F42 /* TimerTableViewController.swift */,
@@ -151,7 +159,7 @@
 		F54BB28622BC5E2700B2052F /* Timer Creation */ = {
 			isa = PBXGroup;
 			children = (
-				F54BB28B22BDBD2800B2052F /* CreateTimerTableViewController.swift */,
+				F54BB28B22BDBD2800B2052F /* AddEditTimerTableViewController.swift */,
 			);
 			path = "Timer Creation";
 			sourceTree = "<group>";
@@ -162,6 +170,23 @@
 				F54BB28E22C0727000B2052F /* FormatTimes.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F5CD584522C71FFD00DD4CAE /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				F5CD584622C7202E00DD4CAE /* UserInfoService.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		F5CD586C22C87ECB00DD4CAE /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				F5CD586922C87EBE00DD4CAE /* HITTTimers.xcdatamodeld */,
+				F5CD586D22CC432300DD4CAE /* TimerInfoService.swift */,
+			);
+			path = "Core Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,7 +324,10 @@
 				F512A73422A47BF500C5128E /* TimerModel.swift in Sources */,
 				F54BB28F22C0727000B2052F /* FormatTimes.swift in Sources */,
 				F5EB8BB922ADD7A900C18F42 /* TimerTableViewController.swift in Sources */,
-				F54BB28C22BDBD2800B2052F /* CreateTimerTableViewController.swift in Sources */,
+				F5CD586E22CC432300DD4CAE /* TimerInfoService.swift in Sources */,
+				F5CD584722C7202E00DD4CAE /* UserInfoService.swift in Sources */,
+				F5CD586B22C87EBE00DD4CAE /* HITTTimers.xcdatamodeld in Sources */,
+				F54BB28C22BDBD2800B2052F /* AddEditTimerTableViewController.swift in Sources */,
 				F512A70522A47AD300C5128E /* AppDelegate.swift in Sources */,
 				F5EB8BBB22B3271E00C18F42 /* TimerTableViewCell.swift in Sources */,
 			);
@@ -622,6 +650,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F5CD586922C87EBE00DD4CAE /* HITTTimers.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F5CD586A22C87EBE00DD4CAE /* HITTTimers.xcdatamodel */,
+			);
+			currentVersion = F5CD586A22C87EBE00DD4CAE /* HITTTimers.xcdatamodel */;
+			path = HITTTimers.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F512A6F922A47AD300C5128E /* Project object */;
 }

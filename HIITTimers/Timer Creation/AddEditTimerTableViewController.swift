@@ -1,5 +1,5 @@
 //
-//  CreateTimerTableViewController.swift
+//  AddEditTimerTableViewController.swift
 //  HIITTimers
 //
 //  Created by Justin Pauga on 6/21/19.
@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 private struct Constants {
     static let timerPickerValues = Array(0...60)
@@ -15,7 +16,7 @@ private struct Constants {
     static let restTImePickerCellIndexPath = IndexPath(row: 1, section: 2)
     static let roundsPickerCellIndexPath = IndexPath(row: 1, section: 3)
 }
-class CreateTimerTableViewController: UITableViewController {
+class AddEditTimerTableViewController: UITableViewController {
 
     @IBOutlet weak var timerTitleTextField: UITextField!
     @IBOutlet weak var workingTimeLabel: UILabel!
@@ -26,10 +27,11 @@ class CreateTimerTableViewController: UITableViewController {
     @IBOutlet weak var numberOfRoundsPicker: UIPickerView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
+    let userInfoService = UserInfoService()
     var timer: TimerModel?
     
-    var workingTimeMinutes: Int = 0
-    var workingTimeSeconds: Int = 0
+    var workingTimeMinutes: Int?
+    var workingTimeSeconds: Int?
     var restTimeMinutes: Int?
     var restTimeSeconds: Int?
     var numberofRounds: Int?
@@ -64,6 +66,9 @@ class CreateTimerTableViewController: UITableViewController {
         numberOfRoundsPicker.delegate = self
         
         tableView.separatorStyle = .none
+        
+        timerTitleTextField.addTarget(self, action: #selector(textChanged(_:)), for: .editingChanged)
+        updateTimerView()
         updateSaveButtonState()
     }
     
@@ -91,6 +96,32 @@ class CreateTimerTableViewController: UITableViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        guard let workingTimeMinutes = workingTimeMinutes,
+            let workingTimeSeconds = workingTimeSeconds,
+            let numberOfRounds = numberofRounds,
+            segue.identifier == "saveUnwind"
+            else { return }
+        
+        var timer = TimerModel()
+        if let title = timerTitle {
+            timer.timerName = title
+        } else {
+            timer.timerName = "Generic Timer"
+        }
+        timer.workingTimeMinutes = workingTimeMinutes
+        timer.workingTimeSeconds = workingTimeSeconds
+        if let restTimeMinutes = restTimeMinutes, let restTimeSeconds = restTimeSeconds {
+            timer.restTimeMinutes = restTimeMinutes
+            timer.restTimeSeconds = restTimeSeconds
+        }
+        timer.rounds = numberOfRounds
+        
+        self.timer = timer
+        //userInfoService.addTimer(timer)
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         print("Section \(indexPath.section) and Row \(indexPath.row) tapped.")
@@ -114,18 +145,26 @@ class CreateTimerTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-        if let title = timerTitle {
-            print(title)
-        }
-    }
+
     // MARK: Private Functions
     private func updateWorkingTimeLabel() {
-        var minutes: String
-        var seconds: String
+        var minutes: String = "--"
+        var seconds: String = "--"
         
-        minutes = FormatTimes.formatTimeForLabel(time: workingTimeMinutes)
-        seconds = FormatTimes.formatTimeForLabel(time: workingTimeSeconds)
+        if let workingTimeMinutes = workingTimeMinutes {
+            minutes = FormatTimes.formatTimeForLabel(time: workingTimeMinutes)
+            if workingTimeSeconds == nil {
+                workingTimeSeconds = 0
+                seconds = FormatTimes.formatTimeForLabel(time: workingTimeSeconds ?? 0)
+            }
+        }
+        if let workingTimeSeconds = workingTimeSeconds {
+            seconds = FormatTimes.formatTimeForLabel(time: workingTimeSeconds)
+            if workingTimeMinutes == nil {
+                workingTimeMinutes = 0
+                minutes = FormatTimes.formatTimeForLabel(time: workingTimeMinutes ?? 0)
+            }
+        }
         
         workingTimeLabel.text = "\(minutes):\(seconds)"
         updateSaveButtonState()
@@ -133,13 +172,23 @@ class CreateTimerTableViewController: UITableViewController {
     
     private func updateRestTimeLabel() {
         
-        guard let restTimeMinutes = restTimeMinutes, let restTimeSeconds = restTimeSeconds else { return }
-        
         var minutes: String = "--"
         var seconds: String = "--"
         
-        minutes = FormatTimes.formatTimeForLabel(time: restTimeMinutes)
-        seconds = FormatTimes.formatTimeForLabel(time: restTimeSeconds)
+        if let restTimeMinutes = restTimeMinutes {
+            minutes = FormatTimes.formatTimeForLabel(time: restTimeMinutes)
+            if restTimeSeconds == nil {
+                restTimeSeconds = 0
+                seconds = FormatTimes.formatTimeForLabel(time: restTimeSeconds ?? 0)
+            }
+        }
+        if let restTimeSeconds = restTimeSeconds {
+            seconds = FormatTimes.formatTimeForLabel(time: restTimeSeconds)
+            if restTimeMinutes == nil {
+                restTimeMinutes = 0
+                minutes = FormatTimes.formatTimeForLabel(time: restTimeMinutes ?? 0)
+            }
+        }
         
         restTimeLabel.text = "\(minutes):\(seconds)"
         updateSaveButtonState()
@@ -153,29 +202,32 @@ class CreateTimerTableViewController: UITableViewController {
     }
     
     private func updateSaveButtonState() {
-        guard let rounds = numberofRounds else { return }
+        guard let workingTimeMinutes = workingTimeMinutes,
+              let workingTimeSeconds = workingTimeSeconds,
+              let rounds = numberofRounds
+              else { return }
         
         if workingTimeMinutes > 0 || workingTimeSeconds > 0 {
             saveButton.isEnabled = true
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        guard segue.identifier == "saveUnwind" else { return }
-        
-        if let title = timerTitle {
-            timer?.timerName = title
-        } else {
-            timer?.timerName = "Timer 1"
+    private func updateTimerView() {
+        if let timer = timer {
+            timerTitleTextField.text = timer.timerName
+            workingTimeMinutes = timer.workingTimeMinutes
+            workingTimeSeconds = timer.workingTimeSeconds
+            numberofRounds = timer.rounds
+            restTimeMinutes = timer.restTimeMinutes
+            restTimeSeconds = timer.restTimeSeconds
         }
-        timer?.workingTimeMinutes = workingTimeMinutes
-        timer?.workingTimeSeconds = workingTimeSeconds
-        
+        updateNumberOfRoundsLabel()
+        updateRestTimeLabel()
+        updateWorkingTimeLabel()
     }
 }
 
-extension CreateTimerTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension AddEditTimerTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         if pickerView == numberOfRoundsPicker {
@@ -254,6 +306,6 @@ extension CreateTimerTableViewController: UIPickerViewDelegate, UIPickerViewData
     }
 }
 
-extension CreateTimerTableViewController: UITextFieldDelegate {
+extension AddEditTimerTableViewController: UITextFieldDelegate {
     
 }
