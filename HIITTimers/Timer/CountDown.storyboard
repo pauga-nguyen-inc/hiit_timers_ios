@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Count Down View Controller-->
+        <scene sceneID="TTu-9I-NBK">
+            <objects>
+                <viewController storyboardIdentifier="CountDownViewController" id="RFl-uZ-60T" customClass="CountDownViewController" customModule="HIITTimers" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="H1G-yd-ia9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vra-AT-mhz">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Nc-X5-Bwd">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="6zd-vb-QgA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Working/Rest" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pUs-dZ-nWs">
+                                        <rect key="frame" x="0.0" y="60" width="414" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="L6S-ir-6L9"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBI-9O-ya4">
+                                        <rect key="frame" x="0.0" y="110" width="414" height="628"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="60"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jYT-dq-cbJ">
+                                        <rect key="frame" x="0.0" y="738" width="414" height="80"/>
+                                        <color key="backgroundColor" red="0.0" green="0.25419845419999998" blue="0.777789022" alpha="0.55182658449999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="h4Y-UI-Dyi"/>
+                                        </constraints>
+                                        <state key="normal" title="Start">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vra-AT-mhz" firstAttribute="leading" secondItem="Spa-b3-35C" secondAttribute="leading" id="4Ux-MM-R4q"/>
+                            <constraint firstItem="Spa-b3-35C" firstAttribute="bottom" secondItem="vra-AT-mhz" secondAttribute="bottom" id="LkG-fD-1Eq"/>
+                            <constraint firstItem="vra-AT-mhz" firstAttribute="top" secondItem="Spa-b3-35C" secondAttribute="top" id="R7A-HZ-fm6"/>
+                            <constraint firstItem="Spa-b3-35C" firstAttribute="trailing" secondItem="vra-AT-mhz" secondAttribute="trailing" id="jkm-QV-QSI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Spa-b3-35C"/>
+                    </view>
+                    <connections>
+                        <outlet property="startPauseButton" destination="jYT-dq-cbJ" id="l4M-b5-Lha"/>
+                        <outlet property="timerLabel" destination="BBI-9O-ya4" id="1T2-lD-aVU"/>
+                        <outlet property="timerTitle" destination="0Nc-X5-Bwd" id="gMD-Ix-HpM"/>
+                        <outlet property="workRestLabel" destination="pUs-dZ-nWs" id="ECF-eZ-Wz1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="odi-0E-2B1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-36" y="156"/>
+        </scene>
+    </scenes>
+</document>

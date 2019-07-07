@@ -41,6 +41,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="HXV-GF-yLr" kind="show" id="G3H-3B-Jyb"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -67,6 +70,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Swx-ug-8Ax" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="449" y="145"/>
+        </scene>
+        <!--CountDownViewController-->
+        <scene sceneID="eeg-Vy-3Ld">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CountDown" referencedIdentifier="CountDownViewController" id="HXV-GF-yLr" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oaO-7u-5wC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="414" y="542"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="ZER-Ws-bi6">

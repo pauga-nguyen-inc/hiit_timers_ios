@@ -18,6 +18,8 @@
 		F5CD584722C7202E00DD4CAE /* UserInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CD584622C7202E00DD4CAE /* UserInfoService.swift */; };
 		F5CD586B22C87EBE00DD4CAE /* HITTTimers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F5CD586922C87EBE00DD4CAE /* HITTTimers.xcdatamodeld */; };
 		F5CD586E22CC432300DD4CAE /* TimerInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CD586D22CC432300DD4CAE /* TimerInfoService.swift */; };
+		F5CED7F322D04B4200F81323 /* CountDown.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5CED7F222D04B4200F81323 /* CountDown.storyboard */; };
+		F5CED7F522D052AB00F81323 /* CountDownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CED7F422D052AB00F81323 /* CountDownViewController.swift */; };
 		F5EB8BB722ADD53100C18F42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5EB8BB622ADD53100C18F42 /* Main.storyboard */; };
 		F5EB8BB922ADD7A900C18F42 /* TimerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EB8BB822ADD7A900C18F42 /* TimerTableViewController.swift */; };
 		F5EB8BBB22B3271E00C18F42 /* TimerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EB8BBA22B3271E00C18F42 /* TimerTableViewCell.swift */; };
@@ -59,6 +61,8 @@
 		F5CD584622C7202E00DD4CAE /* UserInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoService.swift; sourceTree = "<group>"; };
 		F5CD586A22C87EBE00DD4CAE /* HITTTimers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HITTTimers.xcdatamodel; sourceTree = "<group>"; };
 		F5CD586D22CC432300DD4CAE /* TimerInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerInfoService.swift; sourceTree = "<group>"; };
+		F5CED7F222D04B4200F81323 /* CountDown.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CountDown.storyboard; sourceTree = "<group>"; };
+		F5CED7F422D052AB00F81323 /* CountDownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownViewController.swift; sourceTree = "<group>"; };
 		F5EB8BB622ADD53100C18F42 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F5EB8BB822ADD7A900C18F42 /* TimerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTableViewController.swift; sourceTree = "<group>"; };
 		F5EB8BBA22B3271E00C18F42 /* TimerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTableViewCell.swift; sourceTree = "<group>"; };
@@ -113,10 +117,11 @@
 		F512A70322A47AD300C5128E /* HIITTimers */ = {
 			isa = PBXGroup;
 			children = (
+				F5CED7F122D04A3D00F81323 /* Timer */,
 				F5CD586C22C87ECB00DD4CAE /* Core Data */,
 				F54BB28D22C0725300B2052F /* Helpers */,
 				F54BB28622BC5E2700B2052F /* Timer Creation */,
-				F512A73222A47BDC00C5128E /* Timers */,
+				F512A73222A47BDC00C5128E /* Timer Models */,
 				F5CD584522C71FFD00DD4CAE /* Utilities */,
 				F512A70422A47AD300C5128E /* AppDelegate.swift */,
 				F5EB8BB622ADD53100C18F42 /* Main.storyboard */,
@@ -146,14 +151,14 @@
 			path = HIITTimersUITests;
 			sourceTree = "<group>";
 		};
-		F512A73222A47BDC00C5128E /* Timers */ = {
+		F512A73222A47BDC00C5128E /* Timer Models */ = {
 			isa = PBXGroup;
 			children = (
 				F512A73322A47BF500C5128E /* TimerModel.swift */,
 				F5EB8BBA22B3271E00C18F42 /* TimerTableViewCell.swift */,
 				F5EB8BBC22B3273400C18F42 /* TimerTableViewCell.xib */,
 			);
-			path = Timers;
+			path = "Timer Models";
 			sourceTree = "<group>";
 		};
 		F54BB28622BC5E2700B2052F /* Timer Creation */ = {
@@ -187,6 +192,15 @@
 				F5CD586D22CC432300DD4CAE /* TimerInfoService.swift */,
 			);
 			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		F5CED7F122D04A3D00F81323 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				F5CED7F222D04B4200F81323 /* CountDown.storyboard */,
+				F5CED7F422D052AB00F81323 /* CountDownViewController.swift */,
+			);
+			path = Timer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,6 +309,7 @@
 			files = (
 				F5EB8BB722ADD53100C18F42 /* Main.storyboard in Resources */,
 				F512A70F22A47AD400C5128E /* LaunchScreen.storyboard in Resources */,
+				F5CED7F322D04B4200F81323 /* CountDown.storyboard in Resources */,
 				F512A70C22A47AD400C5128E /* Assets.xcassets in Resources */,
 				F5EB8BBD22B3273400C18F42 /* TimerTableViewCell.xib in Resources */,
 			);
@@ -323,6 +338,7 @@
 			files = (
 				F512A73422A47BF500C5128E /* TimerModel.swift in Sources */,
 				F54BB28F22C0727000B2052F /* FormatTimes.swift in Sources */,
+				F5CED7F522D052AB00F81323 /* CountDownViewController.swift in Sources */,
 				F5EB8BB922ADD7A900C18F42 /* TimerTableViewController.swift in Sources */,
 				F5CD586E22CC432300DD4CAE /* TimerInfoService.swift in Sources */,
 				F5CD584722C7202E00DD4CAE /* UserInfoService.swift in Sources */,

@@ -70,11 +70,16 @@ class TimerTableViewController: UITableViewController {
         
         return TimerModel(timerName: name, workingTimeMinutes: workingTimeMinutes, workingTimeSeconds: workingTimeSeconds, restTimeMinutes: restTimeMinutes, restTimeSeconds: restTimeSeconds, rounds: numberOfRounds)
     }
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let timer = timers[indexPath.row]
-//
-//        print("Timer Name: \(timer.timerName) \nTimer description: \(timer.description) \nWorking Time: \(timer.workingTime) \nRest time: \(timer.restTime)")
-//    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let timer = timers[indexPath.row]
+
+        let storyBoard = UIStoryboard(name: "CountDown", bundle: nil)
+        self.present((storyBoard.instantiateViewController(withIdentifier: "CountDown") as? CountDownViewController)!, animated: true, completion: nil)
+//        guard let timerCountDownViewController = storyBoard.instantiateViewController(withIdentifier: "CountDown") as? CountDownViewController else { return }
+        
+        
+    }
 
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
